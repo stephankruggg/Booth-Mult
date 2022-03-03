@@ -8,7 +8,7 @@ entity bo is
 	port (
 	    M, Q: in std_logic_vector(x - 1 downto 0);
 		clk, novoNum, carga, cargaM: in std_logic;
-		S: out std_logic_vector(x + x - 1 downto 0);
+		S1, S0: out std_logic_vector(x - 1 downto 0);
       nZero: out std_logic       
 	);
 end bo;
@@ -56,7 +56,7 @@ architecture arch of bo is
 	signal AP, QP, MP, Aula, qShift, mShift, mQ, mN: std_logic_vector(x - 1 downto 0);
     signal AShift: std_logic_vector (x - 1 downto 0) := (OTHERS => '0');
     signal Q0shift: std_logic := '0';
-	 signal Q0p: std_logic;
+	signal Q0p: std_logic;
     signal entN: std_logic_vector(X-1 downto 0) := std_logic_vector(to_unsigned(X, X)); 
     signal N, np: std_logic_vector(X-1 downto 0);
     signal ulaop: std_logic_vector (1 downto 0);
@@ -75,7 +75,8 @@ begin
     ULA1: ula port map (AP, MP, ulaop, Aula);
     np <= n - 1;
     shiftRight1: shiftRight port map (Aula, QP, AShift, QShift, q0shift);
-    S <= AP & QP;
+    S1 <= AP;
+	S0 <= QP;
     igualazero1: igualazero port map (n, nZero);
 
 
